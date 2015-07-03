@@ -8,26 +8,33 @@
   var H = 1000
 
   var drawFL = function() {
+    var seed = rndInt(100000000,999999999)
+    console.log('seed', seed)
+    var rnd = sineDistFact(blumBlumShubFact(seed, 7247, 7823))
+
     var draw = SVG('bg0')
       .size('100%', '100%')
       .viewbox(0, 0, W, H)
       .attr('preserveAspectRatio', 'xMidYMax slice')
+
     draw.rect(W, H)
       .fill({ opacity: 0 })
-      .stroke('#f0f')
-    shroom(draw)
-      .size(200, 200)
-      .cx(500).y(H - 200)
+
+    for (var x = 100; x < 1000; x += 100) {
+      shroom(draw, rnd)
+        .size(100, 100)
+        .cx(x).y(H - 100)
+    }
   }
 
-  var shroom = function(draw) {
-    var stalkW = 30 // 10 to 40.
-    var leftM =  5 // 5 to 30.
-    var rightM = 5 // 5 to 30.
-    var btmIndent = -10 // 0 to -14.
+  var shroom = function(draw, rnd) {
+    var stalkW = rnd(10, 30)
+    var leftM = rnd(5, 30)
+    var rightM = rnd(5, 30)
+    var btmIndent = rnd(-14, 0)
     var btmCornerTweak = (btmIndent < -5 ? 2 : 0)
-    var btmH = 0 // 0 to 45.
-    var rotate = 0 // -25 to 25.
+    var btmH = rnd(0, 45)
+    var rotate = rnd(-25, 25)
 
     var m = draw.nested().viewbox(0,0,100,100)
 
@@ -49,5 +56,28 @@
   }
 
   // m 5,50 c 20,-10 70,-10 90,0 5,2 5,-1 -1,-7 C 50,0 50,0 6,43 0,49 0,52 5,50 z // start.
+
+  var rndInt = function(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  var blumBlumShubFact = function(seed, mod1, mod2) {
+    return function() {
+      seed = (seed * seed) % (mod1 * mod2)
+      return seed / (mod1 * mod2)
+    }
+  }
+
+  var HALF_PI = Math.PI / 2
+
+  var sineDistFact = function(rnd) {
+    return function(min, max) {
+      var i = rnd()
+      var range = max - min
+      var x = Math.floor(Math.sin(i * Math.PI) * (range / 2))
+      x = i > 0.5 ? range - x : x
+      return x + min
+    }
+  }
 
 })()
