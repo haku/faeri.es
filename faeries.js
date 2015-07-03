@@ -20,6 +20,7 @@
     draw.rect(W, H)
       .fill({ opacity: 0 })
 
+
     for (var x = 100; x < 1000; x += 100) {
       shroom(draw, rnd)
         .size(100, 100)
@@ -28,7 +29,7 @@
   }
 
   var shroom = function(draw, rnd) {
-    var stalkW = rnd(10, 30)
+    var stalkW = rnd(10, 25)
     var leftM = rnd(5, 30)
     var rightM = rnd(5, 30)
     var btmIndent = rnd(-14, 0)
@@ -39,7 +40,7 @@
     var m = draw.nested().viewbox(0,0,100,100)
 
     m.rect(stalkW, 70)
-      .cx(50).y(30 + btmH)
+      .cx(50).y(30 + (btmH * 0.4))
       .fill('#fff')
 
     var path = ('m ' + leftM + ',' + (50 + btmH) + ' ' +
