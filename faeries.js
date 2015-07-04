@@ -35,6 +35,8 @@
 
   var shroom = function(draw, rnd) {
     var stalkW = rnd(10, 25)
+    var stalkTopN = Math.min(rnd(5, 15), stalkW / 2) // narrowing
+    var stalkS = rnd(-10, 10) // shift / lean
     var leftM = rnd(5, 30)
     var rightM = rnd(5, 30)
     var btmIndent = rnd(-14, 0)
@@ -44,17 +46,26 @@
 
     var m = draw.nested().viewbox(0, 0, 100, 100)
 
-    m.rect(stalkW, 70)
-      .cx(50).y(30 + (btmH * 0.4))
+    var sPath = ('m 0,0 ' +
+        'c ' + stalkTopN + ',0 ' + (-stalkS + stalkTopN) + ',17 ' + (-stalkS + stalkTopN) + ',35 ' +
+        '0,17 ' + stalkS + ',35 ' + stalkS + ',35 ' +
+        'l ' + -stalkW + ',0 ' +
+        'c 0,0 ' + -stalkS + ',-17 ' + -stalkS + ',-35 ' +
+        '0,-17 ' + stalkS + ',-35 ' + (stalkS + stalkTopN) + ',-35 z')
+    console.log('sPath', sPath)
+    var stalkH = 85 - btmH
+    m.path(sPath)
+      .cx(50).y(100 - stalkH)
+      .height(stalkH)
       .fill('#fff')
 
-    var path = ('m ' + leftM + ',' + (50 + btmH) + ' ' +
+    var cPath = ('m ' + leftM + ',' + (50 + btmH) + ' ' +
            'c 20,' + btmIndent + ' ' + (80 - (leftM + rightM)) + ',' + btmIndent + ' ' + (100 - (leftM + rightM)) + ',0 ' +
            '5,' + btmCornerTweak + ' 5,-1 -1,-7 ' +
            'C 50,0 50,0 ' + (leftM + 1) + ',' + (43 + btmH) + ' ' +
            (leftM - 5) + ',' + (49 + btmH) + ' ' + (leftM - 5) + ',' + (50 + btmCornerTweak + btmH) + ' ' + leftM + ',' + (50 + btmH) + ' z')
-    console.log('path', path)
-    m.path(path)
+    console.log('cPath', cPath)
+    m.path(cPath)
       .cx(50).y(0)
       .attr('transform', 'rotate(' + rotate + ', 50, 50)')
       .fill('#fff')
@@ -62,7 +73,8 @@
     return m
   }
 
-  // m 5,50 c 20,-10 70,-10 90,0 5,2 5,-1 -1,-7 C 50,0 50,0 6,43 0,49 0,52 5,50 z // start.
+  // m 5,50 c 20,-10 70,-10 90,0 5,2 5,-1 -1,-7 C 50,0 50,0 6,43 0,49 0,52 5,50 z
+  // m 65,30 c 0,0 0,17 0,35 0,17 0,35 0,35 l -30,0 c 0,0 0,-17 0,-35 0,-17 0,-35 0,-35 z
 
   var removeElementById = function(id) {
     var el = document.getElementById(id)
