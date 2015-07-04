@@ -1,6 +1,7 @@
 (function(){
 
   document.addEventListener("DOMContentLoaded", function(event) {
+    document.getElementById('bg0').onclick = drawFL
     drawFL()
   })
 
@@ -12,7 +13,9 @@
     console.log('seed', seed)
     var rnd = sineDistFact(blumBlumShubFact(seed, 7247, 7823))
 
+    removeElementById('bg0_svg')
     var draw = SVG('bg0')
+      .attr('id', 'bg0_svg')
       .size('100%', '100%')
       .viewbox(0, 0, W, H)
       .attr('preserveAspectRatio', 'xMidYMax slice')
@@ -60,6 +63,11 @@
   }
 
   // m 5,50 c 20,-10 70,-10 90,0 5,2 5,-1 -1,-7 C 50,0 50,0 6,43 0,49 0,52 5,50 z // start.
+
+  var removeElementById = function(id) {
+    var el = document.getElementById(id)
+    if (el) el.parentElement.removeChild(el)
+  }
 
   var rndInt = function(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min
