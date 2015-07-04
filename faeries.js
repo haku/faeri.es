@@ -8,7 +8,7 @@
   var H = 1000
 
   var drawFL = function() {
-    var seed = rndInt(100000000,999999999)
+    var seed = rndInt(100000000, 999999999)
     console.log('seed', seed)
     var rnd = sineDistFact(blumBlumShubFact(seed, 7247, 7823))
 
@@ -37,7 +37,7 @@
     var btmH = rnd(0, 45)
     var rotate = rnd(-25, 25)
 
-    var m = draw.nested().viewbox(0,0,100,100)
+    var m = draw.nested().viewbox(0, 0, 100, 100)
 
     m.rect(stalkW, 70)
       .cx(50).y(30 + (btmH * 0.4))
@@ -53,6 +53,7 @@
       .cx(50).y(0)
       .attr('transform', 'rotate(' + rotate + ', 50, 50)')
       .fill('#fff')
+
     return m
   }
 
@@ -68,8 +69,6 @@
       return seed / (mod1 * mod2)
     }
   }
-
-  var HALF_PI = Math.PI / 2
 
   var sineDistFact = function(rnd) {
     return function(min, max) {
