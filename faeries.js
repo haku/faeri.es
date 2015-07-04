@@ -20,11 +20,13 @@
     draw.rect(W, H)
       .fill({ opacity: 0 })
 
-
-    for (var x = 100; x < 1000; x += 100) {
+    var x = rnd(50, 100)
+    while (x < 950) {
+      var h = rnd(70, 100)
       shroom(draw, rnd)
-        .size(100, 100)
-        .cx(x).y(H - 100)
+        .size(100, h)
+        .cx(x).y(H - h)
+      x += rnd(50, 130)
     }
   }
 
@@ -35,7 +37,7 @@
     var btmIndent = rnd(-14, 0)
     var btmCornerTweak = (btmIndent < -5 ? 2 : 0)
     var btmH = rnd(0, 45)
-    var rotate = rnd(-25, 25)
+    var rotate = rnd(-20, 20)
 
     var m = draw.nested().viewbox(0, 0, 100, 100)
 
