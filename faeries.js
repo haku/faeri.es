@@ -91,6 +91,8 @@
   var leaf = function(draw, rnd) {
     var stemW = rnd(0, 2)
     var rotate = rnd(100, 260)
+    var skewX = rnd(-15, 15)
+    var skewY = rnd(-15, 15)
 
     var l = draw.nested().viewbox(0, 0, 100, 100)
 
@@ -101,7 +103,7 @@
       '15,45 ' + (15 - stemW) + ',60 ' + (49 - stemW) + ',80 z')
     l.path(lPath)
       .cx(50).cy(50)
-      .attr('transform', 'rotate(' + rotate + ', 50, 50)')
+      .attr('transform', 'rotate(' + rotate + ', 50, 50) skewX(' + skewX + ') skewY(' + skewY + ')')
       .fill('#fff')
 
     return l
