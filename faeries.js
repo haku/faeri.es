@@ -25,7 +25,7 @@
 
     var x = rnd(50, 100)
     while (x < 950) {
-      var h = rnd(70, 100)
+      var h = rnd(50, 100)
       shroom(draw, rnd)
         .size(100, h)
         .cx(x).y(H - h)
