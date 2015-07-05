@@ -39,7 +39,7 @@
     var stalkS = rnd(-10, 10) // shift / lean
     var leftM = rnd(5, 30)
     var rightM = rnd(5, 30)
-    var btmIndent = rnd(-14, 0)
+    var btmIndent = rnd(-14, 5)
     var btmCornerTweak = (btmIndent < -5 ? 2 : 0)
     var btmH = rnd(0, 45)
     var rotate = rnd(-20, 20)
@@ -47,11 +47,11 @@
     var m = draw.nested().viewbox(0, 0, 100, 100)
 
     var sPath = ('m 0,0 ' +
-        'c ' + stalkTopN + ',0 ' + (-stalkS + stalkTopN) + ',17 ' + (-stalkS + stalkTopN) + ',35 ' +
-        '0,17 ' + stalkS + ',35 ' + stalkS + ',35 ' +
+        'c ' + stalkTopN + ',0 ' + (-stalkS + stalkTopN) + ',17 ' + (-stalkS + stalkTopN) + ',50 ' +
+        '0,17 ' + stalkS + ',20 ' + stalkS + ',20 ' +
         'l ' + -stalkW + ',0 ' +
-        'c 0,0 ' + -stalkS + ',-17 ' + -stalkS + ',-35 ' +
-        '0,-17 ' + stalkS + ',-35 ' + (stalkS + stalkTopN) + ',-35 z')
+        'c 0,0 ' + -stalkS + ',-2 ' + -stalkS + ',-20 ' +
+        '0,-17 ' + stalkS + ',-50 ' + (stalkS + stalkTopN) + ',-50 z')
     console.log('sPath', sPath)
     var stalkH = 85 - btmH
     m.path(sPath)
