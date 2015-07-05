@@ -13,10 +13,9 @@ body {
   margin: 0;
   padding: 0;
 }
-#bg0, #bg1, #mountains {
+#bg0, #bg1 {
   position: absolute;
   width: 100%;
-  z-index: -1;
 }
 #bg0 {
   top: 0;
@@ -25,5 +24,4 @@ body {
 #bg1 {
   top: 90%;
   height: 10%;
-  margin: -1px;
 }
