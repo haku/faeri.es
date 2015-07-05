@@ -43,6 +43,7 @@
     var btmIndent = rnd(-14, 5)
     var btmCornerTweak = (btmIndent < -5 ? 2 : 0)
     var btmH = rnd(0, 45)
+    var edgeUp = rnd(0, -5) - (btmH / (100 - leftM - rightM)) * 10
     var rotate = rnd(-20, 20)
 
     var m = draw.nested().viewbox(0, 0, 100, 100)
@@ -62,8 +63,8 @@
 
     var cPath = ('m ' + leftM + ',' + (50 + btmH) + ' ' +
            'c 20,' + btmIndent + ' ' + (80 - (leftM + rightM)) + ',' + btmIndent + ' ' + (100 - (leftM + rightM)) + ',0 ' +
-           '5,' + btmCornerTweak + ' 5,-1 -1,-7 ' +
-           'C 50,0 50,0 ' + (leftM + 1) + ',' + (43 + btmH) + ' ' +
+           '5,' + btmCornerTweak + ' 5,-1 -1,' + (-7 + edgeUp) + ' ' +
+           'C 50,0 50,0 ' + (leftM + 1) + ',' + (43 + btmH + edgeUp) + ' ' +
            (leftM - 5) + ',' + (49 + btmH) + ' ' + (leftM - 5) + ',' + (50 + btmCornerTweak + btmH) + ' ' + leftM + ',' + (50 + btmH) + ' z')
     console.log('cPath', cPath)
     m.path(cPath)
