@@ -35,6 +35,7 @@
 
   var shroom = function(draw, rnd) {
     var stalkW = rnd(10, 25)
+    var stalkBM = rnd(0, 10) // base margin
     var stalkTopN = Math.min(rnd(5, 15), stalkW / 2) // narrowing
     var stalkS = rnd(-10, 10) // shift / lean
     var leftM = rnd(5, 30)
@@ -48,9 +49,9 @@
 
     var sPath = ('m 0,0 ' +
         'c ' + stalkTopN + ',0 ' + (-stalkS + stalkTopN) + ',17 ' + (-stalkS + stalkTopN) + ',50 ' +
-        '0,17 ' + stalkS + ',20 ' + stalkS + ',20 ' +
-        'l ' + -stalkW + ',0 ' +
-        'c 0,0 ' + -stalkS + ',-2 ' + -stalkS + ',-20 ' +
+        '0,17 ' + stalkS + ',20 ' + (stalkS + stalkBM) + ',20 ' +
+        'l ' + -(stalkW + stalkBM * 2) + ',0 ' +
+        'c 0,0 ' + (-stalkS + stalkBM)  + ',-2 ' + (-stalkS + stalkBM) + ',-20 ' +
         '0,-17 ' + stalkS + ',-50 ' + (stalkS + stalkTopN) + ',-50 z')
     console.log('sPath', sPath)
     var stalkH = 85 - btmH
